@@ -7719,17 +7719,9 @@ $(document).ready(function() {
 
     $( ".js-expand" ).click(function(e) {
         e.preventDefault();
-
         //$('.codeBlocks').removeClass('codeBlocks-open');
         $(this).closest('.codeBlocks').toggleClass('codeBlocks-open');
     });
-
-
-
-
-    
-
-
 
     $( ".ace_content" ).click(function() {
         $('.codeBlocks').removeClass('atomic-editorWrap-active');
@@ -7745,6 +7737,31 @@ $(document).ready(function() {
     $( ".js-copyBtn-edit" ).click(function() {
         $('.codeBlocks').removeClass('atomic-editorWrap-active');
         $(this).closest('.codeBlocks').addClass('atomic-editorWrap-active');
+    });
+
+    $( ".js-copyBtn" ).click(function() {
+        var copyInputId = '#'+$(this).data("copy-target"),
+            target = document.createElement("textarea");
+        target.style.position = "absolute";
+        target.style.left = "-9999px";
+        target.style.top = "0";
+        document.body.appendChild(target);
+        target.textContent = $(copyInputId).val();
+
+        var currentFocus = document.activeElement;
+        target.focus();
+        target.setSelectionRange(0, target.value.length);
+        // copy the selection
+        var succeed;
+        try {
+            succeed = document.execCommand("copy");
+        } catch(e) {
+            succeed = false;
+        }
+        // restore original focus
+        if (currentFocus && typeof currentFocus.focus === "function") {
+            currentFocus.focus();
+        }
     });
 
 });
@@ -8143,35 +8160,25 @@ $('.js_edit-component').click(function (event) {
     var compName = $(this).data('comp');
 
 
-
     event.preventDefault();
     $.ajax(this.href, {
         success: function (data) {
             $('#js_actionDrawer__content').html($(data));
 
-
-
             var bgColor = $('input[name=bgColor]').val()
-
 
             var notesVal = $('#' + compName + '-container').find('.compNotes').data('description');
             var dataColor = $('#' + compName + '-container').find('.component').data('color');
             var hasJs = $('#' + compName + '-container').data('hasjs');
 
-
-
             if(hasJs == true){
                 $('.hasJs-checkbox').remove();
             }
-
 
             $('input[name=compName]').val(compName);
             $('textarea[name=compNotes]').val(notesVal);
 
             //console.log(hasJs);
-
-
-
 
             $(".bgColor").spectrum({
                 allowEmpty: true,
@@ -8179,10 +8186,6 @@ $('.js_edit-component').click(function (event) {
                 showInput: true,
                 color: dataColor
             });
-
-
-
-
 
             $('#edit-comp-file').submit(function (event) {
 
@@ -8196,7 +8199,6 @@ $('.js_edit-component').click(function (event) {
                     js_file = "false"
                 }
 
-
                 var formData = {
                     'catName': catName,
                     'newName': $('input[name=compName]').val().replace(/\s+/g, ''),
@@ -8208,7 +8210,6 @@ $('.js_edit-component').click(function (event) {
                     'hasJs': hasJs,
                     'btnValue-delete': $('.delete-txt').val()
                 };
-
 
                 $.ajax({
                         type: 'POST',
@@ -8245,23 +8246,7 @@ $('.js_edit-component').click(function (event) {
                 event.preventDefault();
             });
 
-
-
-
-
-
-
-
-
-
-
-
-
             $('#delete-comp-file').submit(function (event) {
-
-
-
-
 
                 var formData = {
                     'catName': catName,
@@ -8269,12 +8254,6 @@ $('.js_edit-component').click(function (event) {
                     'hasJs': hasJs
 
                 };
-
-
-
-
-
-
 
                 $.ajax({
                         type: 'POST',
@@ -8309,38 +8288,6 @@ $('.js_edit-component').click(function (event) {
 
                 event.preventDefault();
             });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         },
         error: function () {
@@ -8488,6 +8435,10 @@ $('#importForm').submit(function (event) {
 $(document).ready(function(){
     $(".form-create-jsfile").on("change", "input:checkbox", function(){
         $(this).parent(".form-create-jsfile").submit();
+    });
+
+    $(".form-create-cdn-jsfile").on("change", "input:checkbox", function(){
+        $(this).parent(".form-create-cdn-jsfile").submit();
     });
 });
 

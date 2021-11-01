@@ -30,5 +30,85 @@
         "backgroundColor": "",
         "order": 2,
         "has_js": "false"
+    },
+    {
+        "component": "NewComponent",
+        "category": "jsExample",
+        "description": "Description",
+        "backgroundColor": "",
+        "order": -3,
+        "has_js": "true"
+    },
+    {
+        "component": "test2",
+        "category": "jsExample",
+        "description": "",
+        "backgroundColor": "",
+        "order": -4,
+        "has_js": "true"
+    },
+    {
+        "component": "test3",
+        "category": "jsExample",
+        "description": "",
+        "backgroundColor": "",
+        "order": -5,
+        "has_js": "true"
+    },
+    {
+        "component": "sdvsad",
+        "category": "jsExample",
+        "description": "dc",
+        "backgroundColor": "",
+        "order": -6,
+        "has_js": "true"
+    },
+    {
+        "component": "advc",
+        "category": "jsExample",
+        "description": "",
+        "backgroundColor": "",
+        "order": -7,
+        "has_js": "true"
+    },
+    {
+        "component": "adcdscs",
+        "category": "jsExample",
+        "description": "",
+        "backgroundColor": "",
+        "order": -8,
+        "has_js": "true"
+    },
+    {
+        "component": "adcscd",
+        "category": "jsExample",
+        "description": "dcdscddcccccccc",
+        "backgroundColor": "",
+        "order": -9,
+        "has_js": "true"
+    },
+    {
+        "component": "nader",
+        "category": "jsExample",
+        "description": "",
+        "backgroundColor": "",
+        "order": -10,
+        "has_js": "true"
+    },
+    {
+        "component": "tarek",
+        "category": "jsExample",
+        "description": "",
+        "backgroundColor": "",
+        "order": -11,
+        "has_js": "false"
+    },
+    {
+        "component": "cairo",
+        "category": "jsExample",
+        "description": "",
+        "backgroundColor": "",
+        "order": -12,
+        "has_js": "true"
     }
 ]

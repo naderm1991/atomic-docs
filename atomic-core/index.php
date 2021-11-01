@@ -5,6 +5,7 @@ include("head.php");
 require "fllat.php";
 
 $components = new Fllat("components", "../atomic-db");
+
 $categories = new Fllat("categories", "../atomic-db");
 
 $settings = new Fllat("settings", "../atomic-db");
@@ -14,16 +15,14 @@ $compSelect = $components->select(array());
 $categories = $categories->select(array());
 $settings = $settings->select(array());
 
-
+//echo "<pre/>";
+//var_dump($compSelect);die;
 ?>
 <body id="atomsWrap" class="atoms" xmlns="http://www.w3.org/1999/html">
 
-
 <div id="search-list" class="searchWindow">
 
-
     <div class="atoms-overflow">
-
 
         <i class="fa fa-times fa-3x js_searchWindow__close searchWindow__close"></i>
 
@@ -135,24 +134,6 @@ $settings = $settings->select(array());
                                data-cat="<?php echo $category['category'] ?>"
                                href="atomic-core/?cat=<?php echo $category['category'] ?>"><?php echo $category['category'] ?></a>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                         <ul class="aa_fileSection fileSection-<?php echo $category['category'] ?>">
                             <li class="aa_addFileItem">
@@ -276,10 +257,7 @@ $settings = $settings->select(array());
             foreach ($compSelect as $component) {
                 foreach ($settings as $setting)
                     ?>
-
-
-                    <div id="<?php echo $component['component'] ?>-container" class="compWrap"
-                                                                              data-hasjs="<?php echo $component['has_js'] ?>">
+                    <div id="<?php echo $component['component'] ?>-container" class="compWrap" data-hasjs="<?php echo $component['has_js'] ?>">
                 <p id="<?php echo $component['component'] ?>"
                    class="content-editable compTitle">
                     <span><?php echo $component['component'] ?></span>&nbsp;
@@ -290,7 +268,8 @@ $settings = $settings->select(array());
                     </a>
                 </p>
                 <p class="compNotes"
-                   data-description="<?php echo $component['description'] ?>"><?php echo $component['description'] ?></p>
+                   data-description="<?php echo $component['description'] ?>">
+                    <?php echo $component['description'] ?></p>
                 <div class="component <?php if ($component['backgroundColor']) { ?>componentHasBg<?php } ?>"
                      data-color="<?php echo $component['backgroundColor'] ?>"
                      style="background-color:<?php echo $component['backgroundColor'] ?>">
@@ -318,20 +297,22 @@ $settings = $settings->select(array());
                                 aria-controls="home" role="tab"
                                 data-toggle="tab"><i class="fa fa-code" aria-hidden="true"></i> Markup</a></li>
 
-
                         <li role="presentation"><a
                                 href="#<?php echo $component['component'] ?>-output-tab"
                                 aria-controls="home" role="tab"
                                 data-toggle="tab"><i class="fa fa-eye" aria-hidden="true"></i> Output</a></li>
 
 
-                        <li role="presentation"><a href="#<?php echo $component['component'] ?>-styles-tab"
-                                                   aria-controls="profile"
-                                                   role="tab" data-toggle="tab">{ } Styles</a></li>
-
+                        <li role="presentation">
+                            <a href="#<?php echo $component['component'] ?>-styles-tab"
+                               aria-controls="profile"
+                               role="tab" data-toggle="tab">{ } Styles
+                            </a>
+                        </li>
 
                         <?php if ($component['has_js'] == "true") { ?>
-                            <li role="presentation"><a href="#<?php echo $component['component'] ?>-js-tab"
+                            <li role="presentation">
+                                <a href="#<?php echo $component['component'] ?>-js-tab"
                                                        aria-controls="profile"
                                                        role="tab" data-toggle="tab">( ) Javascript</a></li>
                         <?php } else { ?>
@@ -341,12 +322,14 @@ $settings = $settings->select(array());
                                 <label for="js_file-<?php echo $component['component'] ?>"><span></span>Add a javascript file</label>
                                 <input type="hidden" name="catVal" value="<?php echo $_GET['cat']; ?>">
                                 <input type="hidden" name="jsName" value="<?php echo $component['component'] ?>">
-
                             </form>
 
-
-
-
+                            <form method="post" class="formGroup-check tabForm form-create-cdn-jsfile" action="atomic-core/temp-processing/temp-create-cdn-jsfile.php">
+                                <input class="formInput-check js-input" type="checkbox"  id="js_file_cdn-<?php echo $component['component'] ?>">
+                                <label for="js_file_cdn-<?php echo $component['component'] ?>"><span></span>Add a CDN javascript file</label>
+                                <input type="hidden" name="catVal" value="<?php echo $_GET['cat']; ?>">
+                                <input type="hidden" name="jsName" value="_<?php echo $component['component'] ?>">
+                            </form>
                         <?php } ?>
 
 
@@ -474,12 +457,8 @@ $settings = $settings->select(array());
 
         <?php } ?>
 
-
     </div>
 </div>
-
-
-
 
 <div class="aa_js-actionDrawer aa_actionDrawer">
     <div class="aa_actionDrawer__wrap">

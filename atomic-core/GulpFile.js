@@ -6,26 +6,21 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 
-
-gulp.task('styles', function() {
-    gulp.src('scss/**/*.scss')
+function styles() {
+    return gulp.src('scss/**/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./css/'));
-});
+}
 
-
-gulp.task('styles2', function() {
-    gulp.src('../scss/**/*.scss')
+function styles2() {
+    return gulp.src('../scss/**/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('../css/'));
-});
-
-
-
+}
 
 var jsDest = 'js/min';
 
-gulp.task('scripts', function() {
+function scripts() {
     return gulp.src('js/*.js')
         .pipe(order([
             'js/enquire.js',
@@ -53,34 +48,45 @@ gulp.task('scripts', function() {
         .pipe(rename('compiled.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest(jsDest));
-});
+}
 
 
 
 
 var jsDest2 = '../js/min';
 
-gulp.task('scripts2', function() {
+function scripts2() {
     return gulp.src('../js/*.js')
         .pipe(concat('main.js'))
         .pipe(gulp.dest(jsDest2))
         .pipe(uglify())
         .pipe(gulp.dest(jsDest2));
-});
-
-
+}
 
 
 
 
 //Watch task
-gulp.task('default',function() {
-    gulp.watch('scss/**/*.scss',['styles']);
-    gulp.watch('../scss/**/*.scss',['styles2']);
-    gulp.watch('js/*.js',['scripts']);
-    gulp.watch('../js/*.js',['scripts2']);
-});
+// gulp.task('default',function() {
+//     gulp.watch('scss/**/*.scss',['styles']);
+//     gulp.watch('../scss/**/*.scss',['styles2']);
+//     gulp.watch('js/*.js',['scripts']);
+//     gulp.watch('../js/*.js',['scripts2']);
+// });
 
-gulp.task('setup', ['styles']);
+// gulp.task('setup', ['styles']);
 
-gulp.task('setup', ['styles2']);
+// gulp.task('setup', ['styles2']);
+
+function watch() {
+
+    gulp.watch('scss/**/*.scss',styles);
+    gulp.watch('../scss/**/*.scss',styles2);
+    gulp.watch('js/*.js',scripts);
+    gulp.watch('../js/*.js',scripts2);
+
+}
+
+var build = gulp.parallel(styles, styles2, watch, scripts, scripts2);
+
+gulp.task('default', build);

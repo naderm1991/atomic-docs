@@ -1,0 +1,1 @@
+<!-- components/jsExample/NewComponent.php -->

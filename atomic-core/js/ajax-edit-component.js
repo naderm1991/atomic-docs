@@ -4,35 +4,25 @@ $('.js_edit-component').click(function (event) {
     var compName = $(this).data('comp');
 
 
-
     event.preventDefault();
     $.ajax(this.href, {
         success: function (data) {
             $('#js_actionDrawer__content').html($(data));
 
-
-
             var bgColor = $('input[name=bgColor]').val()
-
 
             var notesVal = $('#' + compName + '-container').find('.compNotes').data('description');
             var dataColor = $('#' + compName + '-container').find('.component').data('color');
             var hasJs = $('#' + compName + '-container').data('hasjs');
 
-
-
             if(hasJs == true){
                 $('.hasJs-checkbox').remove();
             }
-
 
             $('input[name=compName]').val(compName);
             $('textarea[name=compNotes]').val(notesVal);
 
             //console.log(hasJs);
-
-
-
 
             $(".bgColor").spectrum({
                 allowEmpty: true,
@@ -40,10 +30,6 @@ $('.js_edit-component').click(function (event) {
                 showInput: true,
                 color: dataColor
             });
-
-
-
-
 
             $('#edit-comp-file').submit(function (event) {
 
@@ -57,7 +43,6 @@ $('.js_edit-component').click(function (event) {
                     js_file = "false"
                 }
 
-
                 var formData = {
                     'catName': catName,
                     'newName': $('input[name=compName]').val().replace(/\s+/g, ''),
@@ -69,7 +54,6 @@ $('.js_edit-component').click(function (event) {
                     'hasJs': hasJs,
                     'btnValue-delete': $('.delete-txt').val()
                 };
-
 
                 $.ajax({
                         type: 'POST',
@@ -106,23 +90,7 @@ $('.js_edit-component').click(function (event) {
                 event.preventDefault();
             });
 
-
-
-
-
-
-
-
-
-
-
-
-
             $('#delete-comp-file').submit(function (event) {
-
-
-
-
 
                 var formData = {
                     'catName': catName,
@@ -130,12 +98,6 @@ $('.js_edit-component').click(function (event) {
                     'hasJs': hasJs
 
                 };
-
-
-
-
-
-
 
                 $.ajax({
                         type: 'POST',
@@ -170,38 +132,6 @@ $('.js_edit-component').click(function (event) {
 
                 event.preventDefault();
             });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         },
         error: function () {

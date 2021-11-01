@@ -1,0 +1,1 @@
+/* js/NewComponent.js */
